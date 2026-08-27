@@ -1,0 +1,178 @@
+Model: "rffi_transformer2"
+__________________________________________________________________________________________________
+ Layer (type)                   Output Shape         Param #     Connected to                     
+==================================================================================================
+ spectrogram (InputLayer)       [(None, 102, 62, 1)  0           []                               
+                                ]                                                                 
+                                                                                                  
+ patch_projection (Conv2D)      (None, 25, 15, 96)   1632        ['spectrogram[0][0]']            
+                                                                                                  
+ patch_tokens (Reshape)         (None, 375, 96)      0           ['patch_projection[0][0]']       
+                                                                                                  
+ position_embedding (PositionEm  (None, 375, 96)     36000       ['patch_tokens[0][0]']           
+ bedding)                                                                                         
+                                                                                                  
+ embedding_dropout (Dropout)    (None, 375, 96)      0           ['position_embedding[0][0]']     
+                                                                                                  
+ transformer2_0_attention_norm   (None, 375, 96)     192         ['embedding_dropout[0][0]']      
+ (LayerNormalization)                                                                             
+                                                                                                  
+ transformer2_0_attention (Mult  (None, 375, 96)     37248       ['transformer2_0_attention_norm[0
+ iHeadAttention)                                                 ][0]',                           
+                                                                  'transformer2_0_attention_norm[0
+                                                                 ][0]']                           
+                                                                                                  
+ transformer2_0_attention_dropo  (None, 375, 96)     0           ['transformer2_0_attention[0][0]'
+ ut (Dropout)                                                    ]                                
+                                                                                                  
+ transformer2_0_attention_resid  (None, 375, 96)     0           ['embedding_dropout[0][0]',      
+ ual (Add)                                                        'transformer2_0_attention_dropou
+                                                                 t[0][0]']                        
+                                                                                                  
+ transformer2_0_mlp_norm (Layer  (None, 375, 96)     192         ['transformer2_0_attention_residu
+ Normalization)                                                  al[0][0]']                       
+                                                                                                  
+ transformer2_0_mlp_expand (Den  (None, 375, 192)    18624       ['transformer2_0_mlp_norm[0][0]']
+ se)                                                                                              
+                                                                                                  
+ transformer2_0_mlp_dropout_1 (  (None, 375, 192)    0           ['transformer2_0_mlp_expand[0][0]
+ Dropout)                                                        ']                               
+                                                                                                  
+ transformer2_0_mlp_project (De  (None, 375, 96)     18528       ['transformer2_0_mlp_dropout_1[0]
+ nse)                                                            [0]']                            
+                                                                                                  
+ transformer2_0_mlp_dropout_2 (  (None, 375, 96)     0           ['transformer2_0_mlp_project[0][0
+ Dropout)                                                        ]']                              
+                                                                                                  
+ transformer2_0_mlp_residual (A  (None, 375, 96)     0           ['transformer2_0_attention_residu
+ dd)                                                             al[0][0]',                       
+                                                                  'transformer2_0_mlp_dropout_2[0]
+                                                                 [0]']                            
+                                                                                                  
+ transformer2_1_attention_norm   (None, 375, 96)     192         ['transformer2_0_mlp_residual[0][
+ (LayerNormalization)                                            0]']                             
+                                                                                                  
+ transformer2_1_attention (Mult  (None, 375, 96)     37248       ['transformer2_1_attention_norm[0
+ iHeadAttention)                                                 ][0]',                           
+                                                                  'transformer2_1_attention_norm[0
+                                                                 ][0]']                           
+                                                                                                  
+ transformer2_1_attention_dropo  (None, 375, 96)     0           ['transformer2_1_attention[0][0]'
+ ut (Dropout)                                                    ]                                
+                                                                                                  
+ transformer2_1_attention_resid  (None, 375, 96)     0           ['transformer2_0_mlp_residual[0][
+ ual (Add)                                                       0]',                             
+                                                                  'transformer2_1_attention_dropou
+                                                                 t[0][0]']                        
+                                                                                                  
+ transformer2_1_mlp_norm (Layer  (None, 375, 96)     192         ['transformer2_1_attention_residu
+ Normalization)                                                  al[0][0]']                       
+                                                                                                  
+ transformer2_1_mlp_expand (Den  (None, 375, 192)    18624       ['transformer2_1_mlp_norm[0][0]']
+ se)                                                                                              
+                                                                                                  
+ transformer2_1_mlp_dropout_1 (  (None, 375, 192)    0           ['transformer2_1_mlp_expand[0][0]
+ Dropout)                                                        ']                               
+                                                                                                  
+ transformer2_1_mlp_project (De  (None, 375, 96)     18528       ['transformer2_1_mlp_dropout_1[0]
+ nse)                                                            [0]']                            
+                                                                                                  
+ transformer2_1_mlp_dropout_2 (  (None, 375, 96)     0           ['transformer2_1_mlp_project[0][0
+ Dropout)                                                        ]']                              
+                                                                                                  
+ transformer2_1_mlp_residual (A  (None, 375, 96)     0           ['transformer2_1_attention_residu
+ dd)                                                             al[0][0]',                       
+                                                                  'transformer2_1_mlp_dropout_2[0]
+                                                                 [0]']                            
+                                                                                                  
+ transformer2_2_attention_norm   (None, 375, 96)     192         ['transformer2_1_mlp_residual[0][
+ (LayerNormalization)                                            0]']                             
+                                                                                                  
+ transformer2_2_attention (Mult  (None, 375, 96)     37248       ['transformer2_2_attention_norm[0
+ iHeadAttention)                                                 ][0]',                           
+                                                                  'transformer2_2_attention_norm[0
+                                                                 ][0]']                           
+                                                                                                  
+ transformer2_2_attention_dropo  (None, 375, 96)     0           ['transformer2_2_attention[0][0]'
+ ut (Dropout)                                                    ]                                
+                                                                                                  
+ transformer2_2_attention_resid  (None, 375, 96)     0           ['transformer2_1_mlp_residual[0][
+ ual (Add)                                                       0]',                             
+                                                                  'transformer2_2_attention_dropou
+                                                                 t[0][0]']                        
+                                                                                                  
+ transformer2_2_mlp_norm (Layer  (None, 375, 96)     192         ['transformer2_2_attention_residu
+ Normalization)                                                  al[0][0]']                       
+                                                                                                  
+ transformer2_2_mlp_expand (Den  (None, 375, 192)    18624       ['transformer2_2_mlp_norm[0][0]']
+ se)                                                                                              
+                                                                                                  
+ transformer2_2_mlp_dropout_1 (  (None, 375, 192)    0           ['transformer2_2_mlp_expand[0][0]
+ Dropout)                                                        ']                               
+                                                                                                  
+ transformer2_2_mlp_project (De  (None, 375, 96)     18528       ['transformer2_2_mlp_dropout_1[0]
+ nse)                                                            [0]']                            
+                                                                                                  
+ transformer2_2_mlp_dropout_2 (  (None, 375, 96)     0           ['transformer2_2_mlp_project[0][0
+ Dropout)                                                        ]']                              
+                                                                                                  
+ transformer2_2_mlp_residual (A  (None, 375, 96)     0           ['transformer2_2_attention_residu
+ dd)                                                             al[0][0]',                       
+                                                                  'transformer2_2_mlp_dropout_2[0]
+                                                                 [0]']                            
+                                                                                                  
+ transformer2_3_attention_norm   (None, 375, 96)     192         ['transformer2_2_mlp_residual[0][
+ (LayerNormalization)                                            0]']                             
+                                                                                                  
+ transformer2_3_attention (Mult  (None, 375, 96)     37248       ['transformer2_3_attention_norm[0
+ iHeadAttention)                                                 ][0]',                           
+                                                                  'transformer2_3_attention_norm[0
+                                                                 ][0]']                           
+                                                                                                  
+ transformer2_3_attention_dropo  (None, 375, 96)     0           ['transformer2_3_attention[0][0]'
+ ut (Dropout)                                                    ]                                
+                                                                                                  
+ transformer2_3_attention_resid  (None, 375, 96)     0           ['transformer2_2_mlp_residual[0][
+ ual (Add)                                                       0]',                             
+                                                                  'transformer2_3_attention_dropou
+                                                                 t[0][0]']                        
+                                                                                                  
+ transformer2_3_mlp_norm (Layer  (None, 375, 96)     192         ['transformer2_3_attention_residu
+ Normalization)                                                  al[0][0]']                       
+                                                                                                  
+ transformer2_3_mlp_expand (Den  (None, 375, 192)    18624       ['transformer2_3_mlp_norm[0][0]']
+ se)                                                                                              
+                                                                                                  
+ transformer2_3_mlp_dropout_1 (  (None, 375, 192)    0           ['transformer2_3_mlp_expand[0][0]
+ Dropout)                                                        ']                               
+                                                                                                  
+ transformer2_3_mlp_project (De  (None, 375, 96)     18528       ['transformer2_3_mlp_dropout_1[0]
+ nse)                                                            [0]']                            
+                                                                                                  
+ transformer2_3_mlp_dropout_2 (  (None, 375, 96)     0           ['transformer2_3_mlp_project[0][0
+ Dropout)                                                        ]']                              
+                                                                                                  
+ transformer2_3_mlp_residual (A  (None, 375, 96)     0           ['transformer2_3_attention_residu
+ dd)                                                             al[0][0]',                       
+                                                                  'transformer2_3_mlp_dropout_2[0]
+                                                                 [0]']                            
+                                                                                                  
+ encoder_norm (LayerNormalizati  (None, 375, 96)     192         ['transformer2_3_mlp_residual[0][
+ on)                                                             0]']                             
+                                                                                                  
+ token_average_pool (GlobalAver  (None, 96)          0           ['encoder_norm[0][0]']           
+ agePooling1D)                                                                                    
+                                                                                                  
+ classifier_dropout (Dropout)   (None, 96)           0           ['token_average_pool[0][0]']     
+                                                                                                  
+ embedding_dense (Dense)        (None, 512)          49664       ['classifier_dropout[0][0]']     
+                                                                                                  
+ feature_layer (Lambda)         (None, 512)          0           ['embedding_dense[0][0]']        
+                                                                                                  
+ classification (Dense)         (None, 30)           15390       ['feature_layer[0][0]']          
+                                                                                                  
+==================================================================================================
+Total params: 402,014
+Trainable params: 402,014
+Non-trainable params: 0
+__________________________________________________________________________________________________

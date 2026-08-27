@@ -1,0 +1,3 @@
+total_training_seconds=14384.715582
+epochs_completed=124
+mean_epoch_seconds=116.002973

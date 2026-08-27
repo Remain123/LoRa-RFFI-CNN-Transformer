@@ -1,0 +1,36 @@
+{
+  "model": "transformer3",
+  "model_file": "experiments/transformer3/final_model.h5",
+  "test_file": "dataset/Test/dataset_seen_devices.h5",
+  "input_shape": [
+    null,
+    102,
+    62,
+    1
+  ],
+  "training_packets_per_device": 1000,
+  "test_packets_per_device": 400,
+  "num_devices": 30,
+  "batch_size": 16,
+  "optimizer": "Adam",
+  "initial_learning_rate": 0.0003000000142492354,
+  "random_seed": 2026,
+  "epochs_completed": 144,
+  "best_epoch_by_val_accuracy": 114,
+  "best_validation_accuracy": 0.8096666932106018,
+  "best_validation_loss": 0.8936506509780884,
+  "total_training_seconds": 14920.7433993,
+  "mean_epoch_seconds": 103.61350992847224,
+  "test_metrics": {
+    "Model": "transformer3",
+    "Accuracy": 0.9696666666666667,
+    "Macro Precision": 0.970000161250065,
+    "Macro Recall": 0.9696666666666667,
+    "Macro F1": 0.969657840913026,
+    "Parameters": 453950,
+    "FLOPs (one sample)": 188197470.0,
+    "Inference time (s)": 10.13175290000072,
+    "Inference time (ms/sample)": 0.8443127416667267,
+    "Confusion errors": 364
+  }
+}

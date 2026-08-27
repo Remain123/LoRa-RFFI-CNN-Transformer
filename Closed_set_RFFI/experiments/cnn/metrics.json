@@ -1,0 +1,36 @@
+{
+  "model": "cnn",
+  "model_file": "experiments/cnn/final_model.h5",
+  "test_file": "dataset/Test/dataset_seen_devices.h5",
+  "input_shape": [
+    null,
+    102,
+    62,
+    1
+  ],
+  "training_packets_per_device": 1000,
+  "test_packets_per_device": 400,
+  "num_devices": 30,
+  "batch_size": 32,
+  "optimizer": "RMSprop",
+  "initial_learning_rate": 0.001,
+  "random_seed": 2026,
+  "epochs_completed": 75,
+  "best_epoch_by_val_accuracy": 45,
+  "best_validation_accuracy": 0.859666645526886,
+  "best_validation_loss": 0.8652733564376831,
+  "total_training_seconds": 2133.7780204,
+  "mean_epoch_seconds": 28.44762409466667,
+  "test_metrics": {
+    "Model": "cnn",
+    "Accuracy": 0.9953333333333333,
+    "Macro Precision": 0.9954268893892928,
+    "Macro Recall": 0.9953333333333333,
+    "Macro F1": 0.9953262042970407,
+    "Parameters": 12475422,
+    "FLOPs (one sample)": 561435478.0,
+    "Inference time (s)": 3.418511899999885,
+    "Inference time (ms/sample)": 0.28487599166665706,
+    "Confusion errors": 56
+  }
+}

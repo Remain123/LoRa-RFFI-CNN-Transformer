@@ -1,0 +1,37 @@
+# Python environments and caches
+.venv/
+venv/
+env/
+__pycache__/
+*.py[cod]
+.pytest_cache/
+
+# IDE and local machine settings
+.idea/
+.vscode/
+*.iml
+
+# Datasets and trained model weights
+*.h5
+*.hdf5
+*.ckpt
+*.keras
+
+# Runtime logs and temporary files
+*.log
+*.err.log
+*.tmp
+*.temp
+*.bak
+*.swp
+
+# OS-generated files
+.DS_Store
+Thumbs.db
+desktop.ini
+
+# Third-party/reference artwork used only in the dissertation
+Closed_set_RFFI/lora_gateway_cc_by_sa.jpg
+Closed_set_RFFI/lorawan_gateway_fabian_horst.jpg
+Closed_set_RFFI/shen2022_scalable_rffi_system.png
+Closed_set_RFFI/shen2022_scalable_rffi_system_clean.png

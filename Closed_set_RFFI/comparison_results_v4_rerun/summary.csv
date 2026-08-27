@@ -1,0 +1,2 @@
+Model,Accuracy,Macro Precision,Macro Recall,Macro F1,Parameters,FLOPs (one sample),Inference time (s),Inference time (ms/sample),Confusion errors
+Transformer-V4,0.9353333333333333,0.9367958365111231,0.9353333333333332,0.9350061908341114,456126,216124254.0,12.477083300000004,1.039756941666667,776

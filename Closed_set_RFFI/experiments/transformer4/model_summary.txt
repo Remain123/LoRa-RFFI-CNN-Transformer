@@ -1,0 +1,193 @@
+Model: "rffi_transformer4"
+__________________________________________________________________________________________________
+ Layer (type)                   Output Shape         Param #     Connected to                     
+==================================================================================================
+ spectrogram (InputLayer)       [(None, 102, 62, 1)  0           []                               
+                                ]                                                                 
+                                                                                                  
+ stem_local_3x3 (Conv2D)        (None, 102, 62, 32)  320         ['spectrogram[0][0]']            
+                                                                                                  
+ stem_context_dilated_3x3 (Conv  (None, 102, 62, 32)  9248       ['stem_local_3x3[0][0]']         
+ 2D)                                                                                              
+                                                                                                  
+ stem_context_projection (Conv2  (None, 102, 62, 32)  1056       ['stem_context_dilated_3x3[0][0]'
+ D)                                                              ]                                
+                                                                                                  
+ stem_context_residual (Add)    (None, 102, 62, 32)  0           ['stem_local_3x3[0][0]',         
+                                                                  'stem_context_projection[0][0]']
+                                                                                                  
+ stem_norm (LayerNormalization)  (None, 102, 62, 32)  64         ['stem_context_residual[0][0]']  
+                                                                                                  
+ input_padding (ZeroPadding2D)  (None, 104, 64, 32)  0           ['stem_norm[0][0]']              
+                                                                                                  
+ patch_projection (Conv2D)      (None, 26, 16, 96)   49248       ['input_padding[0][0]']          
+                                                                                                  
+ patch_tokens (Reshape)         (None, 416, 96)      0           ['patch_projection[0][0]']       
+                                                                                                  
+ position_embedding (PositionEm  (None, 416, 96)     39936       ['patch_tokens[0][0]']           
+ bedding)                                                                                         
+                                                                                                  
+ embedding_dropout (Dropout)    (None, 416, 96)      0           ['position_embedding[0][0]']     
+                                                                                                  
+ transformer4_0_attention_norm   (None, 416, 96)     192         ['embedding_dropout[0][0]']      
+ (LayerNormalization)                                                                             
+                                                                                                  
+ transformer4_0_attention (Mult  (None, 416, 96)     37248       ['transformer4_0_attention_norm[0
+ iHeadAttention)                                                 ][0]',                           
+                                                                  'transformer4_0_attention_norm[0
+                                                                 ][0]']                           
+                                                                                                  
+ transformer4_0_attention_dropo  (None, 416, 96)     0           ['transformer4_0_attention[0][0]'
+ ut (Dropout)                                                    ]                                
+                                                                                                  
+ transformer4_0_attention_resid  (None, 416, 96)     0           ['embedding_dropout[0][0]',      
+ ual (Add)                                                        'transformer4_0_attention_dropou
+                                                                 t[0][0]']                        
+                                                                                                  
+ transformer4_0_mlp_norm (Layer  (None, 416, 96)     192         ['transformer4_0_attention_residu
+ Normalization)                                                  al[0][0]']                       
+                                                                                                  
+ transformer4_0_mlp_expand (Den  (None, 416, 192)    18624       ['transformer4_0_mlp_norm[0][0]']
+ se)                                                                                              
+                                                                                                  
+ transformer4_0_mlp_dropout_1 (  (None, 416, 192)    0           ['transformer4_0_mlp_expand[0][0]
+ Dropout)                                                        ']                               
+                                                                                                  
+ transformer4_0_mlp_project (De  (None, 416, 96)     18528       ['transformer4_0_mlp_dropout_1[0]
+ nse)                                                            [0]']                            
+                                                                                                  
+ transformer4_0_mlp_dropout_2 (  (None, 416, 96)     0           ['transformer4_0_mlp_project[0][0
+ Dropout)                                                        ]']                              
+                                                                                                  
+ transformer4_0_mlp_residual (A  (None, 416, 96)     0           ['transformer4_0_attention_residu
+ dd)                                                             al[0][0]',                       
+                                                                  'transformer4_0_mlp_dropout_2[0]
+                                                                 [0]']                            
+                                                                                                  
+ transformer4_1_attention_norm   (None, 416, 96)     192         ['transformer4_0_mlp_residual[0][
+ (LayerNormalization)                                            0]']                             
+                                                                                                  
+ transformer4_1_attention (Mult  (None, 416, 96)     37248       ['transformer4_1_attention_norm[0
+ iHeadAttention)                                                 ][0]',                           
+                                                                  'transformer4_1_attention_norm[0
+                                                                 ][0]']                           
+                                                                                                  
+ transformer4_1_attention_dropo  (None, 416, 96)     0           ['transformer4_1_attention[0][0]'
+ ut (Dropout)                                                    ]                                
+                                                                                                  
+ transformer4_1_attention_resid  (None, 416, 96)     0           ['transformer4_0_mlp_residual[0][
+ ual (Add)                                                       0]',                             
+                                                                  'transformer4_1_attention_dropou
+                                                                 t[0][0]']                        
+                                                                                                  
+ transformer4_1_mlp_norm (Layer  (None, 416, 96)     192         ['transformer4_1_attention_residu
+ Normalization)                                                  al[0][0]']                       
+                                                                                                  
+ transformer4_1_mlp_expand (Den  (None, 416, 192)    18624       ['transformer4_1_mlp_norm[0][0]']
+ se)                                                                                              
+                                                                                                  
+ transformer4_1_mlp_dropout_1 (  (None, 416, 192)    0           ['transformer4_1_mlp_expand[0][0]
+ Dropout)                                                        ']                               
+                                                                                                  
+ transformer4_1_mlp_project (De  (None, 416, 96)     18528       ['transformer4_1_mlp_dropout_1[0]
+ nse)                                                            [0]']                            
+                                                                                                  
+ transformer4_1_mlp_dropout_2 (  (None, 416, 96)     0           ['transformer4_1_mlp_project[0][0
+ Dropout)                                                        ]']                              
+                                                                                                  
+ transformer4_1_mlp_residual (A  (None, 416, 96)     0           ['transformer4_1_attention_residu
+ dd)                                                             al[0][0]',                       
+                                                                  'transformer4_1_mlp_dropout_2[0]
+                                                                 [0]']                            
+                                                                                                  
+ transformer4_2_attention_norm   (None, 416, 96)     192         ['transformer4_1_mlp_residual[0][
+ (LayerNormalization)                                            0]']                             
+                                                                                                  
+ transformer4_2_attention (Mult  (None, 416, 96)     37248       ['transformer4_2_attention_norm[0
+ iHeadAttention)                                                 ][0]',                           
+                                                                  'transformer4_2_attention_norm[0
+                                                                 ][0]']                           
+                                                                                                  
+ transformer4_2_attention_dropo  (None, 416, 96)     0           ['transformer4_2_attention[0][0]'
+ ut (Dropout)                                                    ]                                
+                                                                                                  
+ transformer4_2_attention_resid  (None, 416, 96)     0           ['transformer4_1_mlp_residual[0][
+ ual (Add)                                                       0]',                             
+                                                                  'transformer4_2_attention_dropou
+                                                                 t[0][0]']                        
+                                                                                                  
+ transformer4_2_mlp_norm (Layer  (None, 416, 96)     192         ['transformer4_2_attention_residu
+ Normalization)                                                  al[0][0]']                       
+                                                                                                  
+ transformer4_2_mlp_expand (Den  (None, 416, 192)    18624       ['transformer4_2_mlp_norm[0][0]']
+ se)                                                                                              
+                                                                                                  
+ transformer4_2_mlp_dropout_1 (  (None, 416, 192)    0           ['transformer4_2_mlp_expand[0][0]
+ Dropout)                                                        ']                               
+                                                                                                  
+ transformer4_2_mlp_project (De  (None, 416, 96)     18528       ['transformer4_2_mlp_dropout_1[0]
+ nse)                                                            [0]']                            
+                                                                                                  
+ transformer4_2_mlp_dropout_2 (  (None, 416, 96)     0           ['transformer4_2_mlp_project[0][0
+ Dropout)                                                        ]']                              
+                                                                                                  
+ transformer4_2_mlp_residual (A  (None, 416, 96)     0           ['transformer4_2_attention_residu
+ dd)                                                             al[0][0]',                       
+                                                                  'transformer4_2_mlp_dropout_2[0]
+                                                                 [0]']                            
+                                                                                                  
+ transformer4_3_attention_norm   (None, 416, 96)     192         ['transformer4_2_mlp_residual[0][
+ (LayerNormalization)                                            0]']                             
+                                                                                                  
+ transformer4_3_attention (Mult  (None, 416, 96)     37248       ['transformer4_3_attention_norm[0
+ iHeadAttention)                                                 ][0]',                           
+                                                                  'transformer4_3_attention_norm[0
+                                                                 ][0]']                           
+                                                                                                  
+ transformer4_3_attention_dropo  (None, 416, 96)     0           ['transformer4_3_attention[0][0]'
+ ut (Dropout)                                                    ]                                
+                                                                                                  
+ transformer4_3_attention_resid  (None, 416, 96)     0           ['transformer4_2_mlp_residual[0][
+ ual (Add)                                                       0]',                             
+                                                                  'transformer4_3_attention_dropou
+                                                                 t[0][0]']                        
+                                                                                                  
+ transformer4_3_mlp_norm (Layer  (None, 416, 96)     192         ['transformer4_3_attention_residu
+ Normalization)                                                  al[0][0]']                       
+                                                                                                  
+ transformer4_3_mlp_expand (Den  (None, 416, 192)    18624       ['transformer4_3_mlp_norm[0][0]']
+ se)                                                                                              
+                                                                                                  
+ transformer4_3_mlp_dropout_1 (  (None, 416, 192)    0           ['transformer4_3_mlp_expand[0][0]
+ Dropout)                                                        ']                               
+                                                                                                  
+ transformer4_3_mlp_project (De  (None, 416, 96)     18528       ['transformer4_3_mlp_dropout_1[0]
+ nse)                                                            [0]']                            
+                                                                                                  
+ transformer4_3_mlp_dropout_2 (  (None, 416, 96)     0           ['transformer4_3_mlp_project[0][0
+ Dropout)                                                        ]']                              
+                                                                                                  
+ transformer4_3_mlp_residual (A  (None, 416, 96)     0           ['transformer4_3_attention_residu
+ dd)                                                             al[0][0]',                       
+                                                                  'transformer4_3_mlp_dropout_2[0]
+                                                                 [0]']                            
+                                                                                                  
+ encoder_norm (LayerNormalizati  (None, 416, 96)     192         ['transformer4_3_mlp_residual[0][
+ on)                                                             0]']                             
+                                                                                                  
+ token_average_pool (GlobalAver  (None, 96)          0           ['encoder_norm[0][0]']           
+ agePooling1D)                                                                                    
+                                                                                                  
+ classifier_dropout (Dropout)   (None, 96)           0           ['token_average_pool[0][0]']     
+                                                                                                  
+ embedding_dense (Dense)        (None, 512)          49664       ['classifier_dropout[0][0]']     
+                                                                                                  
+ feature_layer (Lambda)         (None, 512)          0           ['embedding_dense[0][0]']        
+                                                                                                  
+ classification (Dense)         (None, 30)           15390       ['feature_layer[0][0]']          
+                                                                                                  
+==================================================================================================
+Total params: 464,254
+Trainable params: 464,254
+Non-trainable params: 0
+__________________________________________________________________________________________________
