@@ -1,10 +1,22 @@
 # LoRa RFFI: Residual CNN and Transformer Comparison
 
-This repository contains a reproducible closed-set LoRa radio-frequency
-fingerprint identification (RFFI) study. It reproduces the Residual CNN
-baseline developed by Shen, Zhang, and co-authors and compares it with four
-progressively refined Transformer models for channel-independent LoRa
-spectrograms.
+This repository contains the implementation and archived experimental results
+of a Master of Science dissertation in Communications and Signal Processing.
+The dissertation investigates reproducible closed-set LoRa radio-frequency
+fingerprint identification (RFFI). It reproduces the Residual CNN baseline
+developed by Shen, Zhang, and co-authors and compares it with four progressively
+refined Transformer models for channel-independent LoRa spectrograms.
+
+## Dissertation scope
+
+The experimental work is limited to closed-set identification of 30 enrolled
+LoRa transmitters. Every device appearing in the test set is also represented
+in the training set. The dissertation does not implement or evaluate open-set
+recognition, unseen-device rejection, or rogue-device detection.
+
+The `Openset_RFFI_TIFS/` directory is retained from the original upstream
+repository for reference and attribution only. None of its code is used in the
+training, testing, model comparison, or reported results of this dissertation.
 
 The implementation extends the original
 [gxhen/LoRa_RFFI](https://github.com/gxhen/LoRa_RFFI) codebase with:
@@ -44,7 +56,7 @@ Closed_set_RFFI/
   evaluate_*.py              Standalone evaluation scripts
   experiments/               Metrics, histories and result figures
   comparison_figures/        Cross-model comparison figures and tables
-Openset_RFFI_TIFS/            Original open-set reference implementation
+Openset_RFFI_TIFS/            Upstream reference only; not used in this study
 ```
 
 ## Environment
