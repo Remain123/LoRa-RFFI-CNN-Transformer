@@ -2,10 +2,14 @@
 
 This repository contains the implementation and archived experimental results
 of a Master of Science dissertation in Communications and Signal Processing.
-The dissertation investigates reproducible closed-set LoRa radio-frequency
-fingerprint identification (RFFI). It reproduces the Residual CNN baseline
-developed by Shen, Zhang, and co-authors and compares it with four progressively
-refined Transformer models for channel-independent LoRa spectrograms.
+The dissertation is primarily based on the closed-set LoRa radio-frequency
+fingerprint identification (RFFI) work of Guanxiong Shen, Junqing Zhang, and
+their co-authors. Their dataset, signal-processing pipeline,
+channel-independent spectrogram representation, and Residual CNN are reproduced
+as the reference framework. The main work of this dissertation is to replace
+the original CNN classifier with four progressively refined Transformer-based
+models and compare their performance with the reproduced CNN baseline under the
+same closed-set task.
 
 ## Dissertation scope
 
@@ -18,7 +22,7 @@ The `Openset_RFFI_TIFS/` directory is retained from the original upstream
 repository for reference and attribution only. None of its code is used in the
 training, testing, model comparison, or reported results of this dissertation.
 
-The implementation extends the original
+The dissertation-specific implementation extends the original
 [gxhen/LoRa_RFFI](https://github.com/gxhen/LoRa_RFFI) codebase with:
 
 - Transformer V1: coarse non-overlapping spectrogram patches;
@@ -101,7 +105,11 @@ excluded from version control because of their size.
 
 ## Attribution
 
-The dataset preparation, channel-independent spectrogram method, Residual CNN
-reference and open-set implementation originate from the work of Guanxiong
-Shen, Junqing Zhang, and their co-authors. Please cite the relevant papers and
-the original repository when using this code.
+The core LoRa RFFI framework—including the dataset, dataset-preparation
+procedure, signal preprocessing, channel-independent spectrogram method, and
+Residual CNN baseline—originates from the work of Guanxiong Shen, Junqing Zhang,
+and their co-authors. The contribution of this dissertation is the design and
+evaluation of four Transformer-based alternatives and their comparison with the
+reproduced CNN baseline; it does not claim authorship of the underlying LoRa
+RFFI framework. Please cite the relevant papers and the original repository
+when using this code.
